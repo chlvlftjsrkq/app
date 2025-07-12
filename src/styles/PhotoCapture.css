@@ -1,0 +1,135 @@
+.photo-capture {
+  text-align: center;
+}
+
+.capture-title {
+  font-size: 2.2em;
+  color: #4a5568;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.capture-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.capture-btn {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.capture-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.capture-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.camera-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.camera-btn:hover {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.upload-btn {
+  background: linear-gradient(45deg, #f093fb, #f5576c);
+  color: white;
+}
+
+.upload-btn:hover {
+  background: linear-gradient(45deg, #f5576c, #f093fb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+}
+
+.take-photo-btn {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: white;
+  font-size: 1.4em;
+  padding: 20px 40px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.take-photo-btn:hover {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+}
+
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.camera-video {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .capture-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .capture-btn {
+    width: 100%;
+    max-width: 250px;
+    margin: 5px 0;
+  }
+  
+  .camera-video {
+    max-width: 100%;
+    height: 250px;
+  }
+  
+  .take-photo-btn {
+    font-size: 1.2em;
+    padding: 15px 30px;
+  }
+}
