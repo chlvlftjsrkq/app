@@ -1,6 +1,7 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PhotoCapture from './components/PhotoCapture';
 import PhotoAnimator from './components/PhotoAnimator';
+import InstallButton from './components/InstallButton';
 import './styles/App.css';
 
 interface Photo {
@@ -12,6 +13,35 @@ interface Photo {
 const App: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [currentPhoto, setCurrentPhoto] = useState<Photo | null>(null);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  // 서비스 워커 등록 및 오프라인 상태 관리
+  useEffect(() => {
+    // 서비스 워커 등록
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+
+    // 온라인/오프라인 상태 감지
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const handlePhotoCapture = useCallback((photoSrc: string) => {
     const newPhoto: Photo = {
@@ -46,9 +76,16 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
+      {isOffline && (
+        <div className="offline-indicator">
+          📶 오프라인 상태입니다
+        </div>
+      )}
+      
       <header className="app-header">
         <h1 className="app-title">📸 사진 애니메이션 놀이터 🎨</h1>
         <p className="app-subtitle">사진을 찍고 신나는 애니메이션을 만들어보세요!</p>
+        <InstallButton />
       </header>
 
       <main className="app-main">

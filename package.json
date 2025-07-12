@@ -5,10 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production",
-    "dev": "webpack serve --mode development"
+    "build": "npm run generate-icons && webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "generate-icons": "node scripts/generateIcons.js"
   },
-  "keywords": ["kids", "photo", "animation", "children", "camera"],
+  "keywords": [
+    "kids",
+    "photo",
+    "animation",
+    "children",
+    "camera"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -23,6 +30,8 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "babel-loader": "^9.1.0",
+    "canvas": "^3.1.2",
+    "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^6.8.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.0",
